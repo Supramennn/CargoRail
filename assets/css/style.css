@@ -1,0 +1,59 @@
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+.hero {
+    min-height: 90vh;
+    background: radial-gradient(circle at 20% 30%, #2d2d2d, #0f0f0f);
+    color: #fff;
+}
+
+.btn-gradient {
+    background: linear-gradient(90deg, #3C6FF0, #9C27B0);
+    border: none;
+    color: #fff;
+    transition: 0.3s ease;
+}
+
+.btn-gradient:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(156, 39, 176, 0.4);
+}
+
+/* Timeline */
+.timeline {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+.timeline::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: rgba(255, 255, 255, .12);
+}
+
+.timeline-item {
+    position: relative;
+    padding-left: 36px;
+    margin: 12px 0;
+}
+
+.timeline-item .dot {
+    position: absolute;
+    left: 6px;
+    top: .35rem;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: linear-gradient(90deg, #3C6FF0, #9C27B0);
+    box-shadow: 0 0 0 3px rgba(60, 111, 240, .15);
+}
+
+.timeline-item .content {
+    line-height: 1.2;
+}
