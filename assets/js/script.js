@@ -213,7 +213,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const page = location.pathname.split('/').pop();
 
     // INDEX (opsional animasi)
-    if (page === "index.html") { /* no-op */ }
+    if (page === "index.html") {
+        aosInit();
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const id = a.getAttribute('href').slice(1);
+                document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+        // kasih kelas aos ke kartu fitur
+        document.querySelectorAll('.feature-card').forEach(c => c.classList.add('aos'));
+    }
+
 
     // REGISTER
     if (page === "register.html") {
