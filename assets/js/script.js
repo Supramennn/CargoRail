@@ -256,13 +256,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // DASHBOARD
     if (page === "dashboard.html") {
-        if (!isLoggedIn()) return requireAuth();
+        requireAuth();                         // wajib login
+        ShipStore.seed(); Users.seed();        // seed data demo
+        aosInit();                             // <-- animasi fade-up untuk .aos
+
         const u = currentUser();
         $("#roleBadge").textContent = u.role.toUpperCase();
-        $("#roleBadge").className = `badge ${u.role === 'admin' ? 'bg-danger-subtle text-danger' : 'bg-primary-subtle text-primary'}`;
+        $("#roleBadge").className = `badge-soft`; // style pink pill
         $("#logoutBtn")?.addEventListener('click', logout);
 
-        // tombol Buat Pengiriman hanya untuk user
+        // tombol create cuma buat user
         if (u.role === 'admin') {
             $("#createBtn")?.classList.add('d-none');
         } else {
@@ -270,16 +273,20 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         $("#searchInput")?.addEventListener('input', (e) => renderTable(e.target.value));
-        renderTable();
+        renderTable();                         // render + KPI + row anim
 
-        // delegasi klik detail
+        // delegasi klik "Detail" → buka modal + e-ticket
         $("#shipmentTable").addEventListener('click', (ev) => {
-            const btn = ev.target.closest('[data-action="detail"]'); if (!btn) return;
-            const s = ShipStore.find(btn.dataset.id); if (!s) return;
+            const btn = ev.target.closest('[data-action="detail"]');
+            if (!btn) return;
+            const s = ShipStore.find(btn.dataset.id);
+            if (!s) return;
             const modal = new bootstrap.Modal(document.getElementById('detailModal'));
-            openDetailModal(s); modal.show();
+            openDetailModal(s);
+            modal.show();
         });
     }
+
 
     // FORM
     if (page === "form.html") {
